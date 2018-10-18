@@ -1,4 +1,4 @@
-package com.epul.info.projetcinema;
+package com.epul.projetcinema;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
