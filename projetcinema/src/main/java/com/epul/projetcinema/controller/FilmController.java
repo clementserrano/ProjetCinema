@@ -1,7 +1,7 @@
-package com.epul.info.projetcinema.controller;
+package com.epul.projetcinema.controller;
 
-import com.epul.info.projetcinema.dao.FilmRepository;
-import com.epul.info.projetcinema.entity.Film;
+import com.epul.projetcinema.dao.FilmRepository;
+import com.epul.projetcinema.entity.Film;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

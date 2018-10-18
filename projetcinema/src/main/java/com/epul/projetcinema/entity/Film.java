@@ -1,4 +1,4 @@
-package com.epul.info.projetcinema.entity;
+package com.epul.projetcinema.entity;
 
 import lombok.*;
 
