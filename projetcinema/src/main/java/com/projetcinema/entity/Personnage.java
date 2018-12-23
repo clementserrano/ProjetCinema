@@ -4,22 +4,20 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "personnage")
 @Data
 @NoArgsConstructor
 public class Personnage {
-    @NonNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "noFilm", nullable = false)
-    private Film film; // TODO
+    @EmbeddedId
+    private PersonnageId personnageId;
 
-    @NonNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "noAct", nullable = false)
-    private Acteur acteur; // TODO
-
+    @Column(name = "NomPers")
     @NonNull
     private String nomPers;
 }

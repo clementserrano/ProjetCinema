@@ -3,6 +3,8 @@ package com.projetcinema.controller;
 import com.projetcinema.dao.CategorieRepository;
 import com.projetcinema.entity.Categorie;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,7 +19,7 @@ public class CategorieController {
     CategorieRepository categorieRepository;
 
     @GetMapping("getCategories")
-    public List<Categorie> getCategories() {
-        return categorieRepository.findAll();
+    public ResponseEntity<List<Categorie>> getCategories() {
+        return new ResponseEntity<>(categorieRepository.findAll(), HttpStatus.OK);
     }
 }
