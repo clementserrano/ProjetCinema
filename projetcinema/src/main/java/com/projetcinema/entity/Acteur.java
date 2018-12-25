@@ -7,6 +7,7 @@ import lombok.NonNull;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "acteur")
@@ -16,7 +17,8 @@ import java.util.Date;
 public class Acteur {
     @Id
     @Column(name = "NoAct")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "acteur_generator")
+    @SequenceGenerator(name = "acteur_generator", sequenceName = "acteur_seq", allocationSize = 1, initialValue = 20)
     @NonNull
     private Integer noAct;
 
@@ -32,4 +34,7 @@ public class Acteur {
 
     @Column(name = "DateDeces")
     private Date dateDeces;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "personnageId.acteur")
+    private List<Personnage> personnages;
 }

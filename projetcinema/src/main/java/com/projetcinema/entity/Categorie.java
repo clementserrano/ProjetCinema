@@ -1,12 +1,14 @@
 package com.projetcinema.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "categorie")
@@ -16,11 +18,14 @@ import javax.persistence.*;
 public class Categorie {
     @Id
     @Column(name = "CodeCat")
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @NonNull
     private String codeCat;
 
     @Column(name = "LibelleCat")
     @NonNull
     private String libelleCat;
+
+    @JsonBackReference
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "categorie")
+    private List<Film> films;
 }
