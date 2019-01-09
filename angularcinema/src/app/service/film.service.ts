@@ -8,7 +8,7 @@ import {Film} from '../model/film';
 })
 export class FilmService {
 
-  url = 'http://localhost:8080/api/film';
+  url = 'http://localhost:8080/projetcinema/film';
 
   constructor(private http: HttpClient) {
   }

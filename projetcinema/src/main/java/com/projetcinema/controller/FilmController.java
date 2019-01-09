@@ -1,9 +1,7 @@
 package com.projetcinema.controller;
 
 import com.projetcinema.dao.FilmRepository;
-import com.projetcinema.dao.PersonnageRepository;
 import com.projetcinema.entity.Film;
-import com.projetcinema.entity.Personnage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

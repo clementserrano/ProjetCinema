@@ -1,22 +1,39 @@
 <h1>Liste de films</h1>
 
-<table>
-  <tr>
-    <th>Numéro</th>
-    <th>Titre</th>
-    <th>Durée</th>
-    <th>Date sortie</th>
-    <th>Catégorie</th>
-    <th>Réalisateur</th>
-  </tr>
-  <tr *ngFor="let film of films">
-    <td>{{film.noFilm}}</td>
-    <td>{{film.titre}}</td>
-    <td>{{film.duree}}</td>
-    <td>{{film.dateSortie}}</td>
-    <td>{{film.categorie.libelleCat}}</td>
-    <td>{{film.realisateur.prenRea}} {{film.realisateur.nomRea}}</td>
-  </tr>
+<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+  <ng-container matColumnDef="no">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
+    <td mat-cell *matCellDef="let film"> {{film.noFilm}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="titre">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Titre </th>
+    <td mat-cell *matCellDef="let film"> {{film.titre}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="duree">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Durée </th>
+    <td mat-cell *matCellDef="let film"> {{film.duree}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="dateSortie">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Date Sortie </th>
+    <td mat-cell *matCellDef="let film"> {{film.dateSortie | date: 'dd/MM/yyyy'}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="realisateur">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Réalisateur </th>
+    <td mat-cell *matCellDef="let film"> {{film.realisateur.prenRea}} {{film.realisateur.nomRea}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="categorie">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Catégorie </th>
+    <td mat-cell *matCellDef="let film"> {{film.categorie.libelleCat}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
 
 
