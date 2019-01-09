@@ -1,11 +1,11 @@
-package com.epul.projetcinema.dao;
+package com.projetcinema.dao;
 
-import com.epul.projetcinema.entity.Film;
+import com.projetcinema.entity.Realisateur;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 @RepositoryRestResource
-@CrossOrigin(origins = "http://localhost:4200")
-public abstract class FilmRepository implements JpaRepository<Film, Long> {
+@CrossOrigin
+public interface RealisateurRepository extends JpaRepository<Realisateur, Integer> {
 }
