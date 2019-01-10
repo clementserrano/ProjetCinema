@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {FilmService} from '../service/film.service';
 import {Film} from '../model/film';
-import {MatTableDataSource} from '@angular/material';
+import {MatSort, MatTableDataSource} from '@angular/material';
 
 @Component({
   selector: 'app-film-list',
@@ -11,17 +11,21 @@ import {MatTableDataSource} from '@angular/material';
 })
 export class FilmListComponent implements OnInit {
   films: Film[];
-  displayedColumns: string[] = ['no', 'titre', 'duree', 'dateSortie', 'realisateur', 'categorie'];
+  displayedColumns: string[] = ['noFilm', 'titre', 'duree', 'dateSortie', 'realisateur', 'categorie'];
   dataSource;
+
+  @ViewChild(MatSort) sort: MatSort;
 
   constructor(private filmService: FilmService) {
   }
 
   ngOnInit() {
-    this.getFilms();
+    this.getFilms(function () {
+      this.dataSource.sort = this.sort;
+    });
   }
 
-  getFilms(): void {
+  getFilms(callback): void {
     this.filmService.getFilms().subscribe(films => {
       this.films = films;
       this.dataSource = new MatTableDataSource(this.films);
