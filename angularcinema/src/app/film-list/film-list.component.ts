@@ -20,17 +20,24 @@ export class FilmListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getFilms(function () {
-      this.dataSource.sort = this.sort;
-    });
+    this.getFilms();
   }
 
-  getFilms(callback): void {
+  getFilms(): void {
     this.filmService.getFilms().subscribe(films => {
       this.films = films;
       this.dataSource = new MatTableDataSource(this.films);
+      this.dataSource.sortingDataAccessor = (item, property) => {
+        switch (property) {
+          case 'realisateur':
+            return item.realisateur.prenRea + ' ' + item.realisateur.nomRea;
+          case 'categorie':
+            return item.categorie.libelleCat;
+          default:
+            return item[property];
+        }
+      };
+      this.dataSource.sort = this.sort;
     });
   }
-
-
 }
