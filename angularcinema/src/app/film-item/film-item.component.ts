@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FilmService } from '../service/film.service';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-film-item',
@@ -7,10 +8,11 @@ import { FilmService } from '../service/film.service';
   styleUrls: ['./film-item.component.css']
 })
 export class FilmItemComponent implements OnInit {
-
-  constructor(private filmService: FilmService) { }
+  public noFilm;
+  constructor(private filmService: FilmService, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.noFilm = this.route.snapshot.paramMap.get('noFilm');
   }
 
 }
