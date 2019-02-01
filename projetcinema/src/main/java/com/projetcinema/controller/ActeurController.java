@@ -1,9 +1,7 @@
 package com.projetcinema.controller;
 
 import com.projetcinema.dao.ActeurRepository;
-import com.projetcinema.dao.PersonnageRepository;
 import com.projetcinema.entity.Acteur;
-import com.projetcinema.entity.Personnage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +13,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("acteur")
+@CrossOrigin(origins = "http://localhost:4200")
 public class ActeurController {
 
     private @Autowired

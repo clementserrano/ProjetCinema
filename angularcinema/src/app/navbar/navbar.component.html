@@ -1,6 +1,11 @@
-<nav>
-  <ul>
-    <a routerLink="/">Test1</a>
-    <a routerLink="/">Test2</a>
-  </ul>
-</nav>
+<mat-toolbar>
+  <nav>
+    <a class="toolbar-item" routerLink="/films">
+      Films
+      <mat-icon class="vertical-align-middle">movie</mat-icon>
+    </a>
+  </nav>
+</mat-toolbar>
+<div class="basic-container">
+  <router-outlet></router-outlet>
+</div>
