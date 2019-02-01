@@ -20,4 +20,8 @@ export class FilmService {
   getFilm(id: number): Observable<Film> {
     return this.http.get<Film>(this.url + '/' + id);
   }
+
+  addFilm(film: Film): Observable<Object> {
+    return this.http.post(this.url, film);
+  }
 }
