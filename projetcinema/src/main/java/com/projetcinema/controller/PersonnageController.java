@@ -34,6 +34,11 @@ public class PersonnageController {
         return new ResponseEntity<>(personnageRepository.findAll(), HttpStatus.OK);
     }
 
+    @GetMapping("{idActeur}")
+    public ResponseEntity<List<Personnage>> getPersonnagesByActeur(@PathVariable Integer idActeur) {
+        return new ResponseEntity(personnageRepository.findByPersonnageId_Acteur_NoAct(idActeur), HttpStatus.OK);
+    }
+
     @GetMapping("{idFilm}/{idActeur}")
     public ResponseEntity<Personnage> getPersonnage(@PathVariable Integer idFilm, @PathVariable Integer idActeur) {
         Optional<Film> optionalFilm = filmRepository.findById(idFilm);

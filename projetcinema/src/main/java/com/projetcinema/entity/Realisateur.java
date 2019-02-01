@@ -1,6 +1,5 @@
 package com.projetcinema.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,7 +12,7 @@ import java.util.List;
 @Table(name = "realisateur")
 @Data
 @NoArgsConstructor
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler","realisateur"})
 public class Realisateur {
     @Id
     @Column(name = "NoRea")
@@ -30,7 +29,6 @@ public class Realisateur {
     @NonNull
     private String prenRea;
 
-    @JsonBackReference
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "realisateur")
     private List<Film> films;
 }

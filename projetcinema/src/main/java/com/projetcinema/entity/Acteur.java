@@ -13,7 +13,7 @@ import java.util.List;
 @Table(name = "acteur")
 @Data
 @NoArgsConstructor
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler","acteur"})
 public class Acteur {
     @Id
     @Column(name = "NoAct")
