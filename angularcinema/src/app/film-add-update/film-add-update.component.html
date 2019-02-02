@@ -35,7 +35,7 @@
 
     <button mat-raised-button color="primary">Ajouter un réalisateur</button>
 
-    <mat-form-field>
+    <mat-form-field class="select-categories">
       <mat-select placeholder="Catégorie">
         <mat-option *ngFor="let categorie of categories" [value]="categorie">
           {{categorie.libelleCat}}
