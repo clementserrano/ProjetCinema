@@ -10,22 +10,16 @@ import {AppRoutingModule} from './app-routing.module';
 import {HttpClientModule} from '@angular/common/http';
 import {CommonModule} from '@angular/common';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {
-  MatButtonModule,
-  MatCheckboxModule,
-  MatIconModule,
-  MatMenuModule,
-  MatSortModule,
-  MatTableModule,
-  MatToolbarModule
-} from '@angular/material';
+import {FilmAddUpdateComponent} from './film-add-update/film-add-update.component';
+import {MaterialModule} from './material.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     FilmListComponent,
-    FilmItemComponent
+    FilmItemComponent,
+    FilmAddUpdateComponent
   ],
   imports: [
     BrowserModule,
@@ -33,11 +27,7 @@ import {
     HttpClientModule,
     CommonModule,
     BrowserAnimationsModule,
-    MatMenuModule,
-    MatIconModule,
-    MatToolbarModule,
-    MatTableModule,
-    MatSortModule
+    MaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]
