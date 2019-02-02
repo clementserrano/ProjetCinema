@@ -58,7 +58,14 @@ export class FilmAddUpdateComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result !== undefined) {
-        this.realisateurs.push(result);
+        this.realisateurService.addRealisateur(result).subscribe(res => {
+          if (res !== undefined) {
+            this.realisateurs.push(result);
+            this.snackBar.open('Réalisateur ajouté avec succès !', 'OK', {
+              duration: 4000,
+            });
+          }
+        });
       }
     });
   }
