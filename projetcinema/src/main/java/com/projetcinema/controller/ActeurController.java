@@ -1,6 +1,7 @@
 package com.projetcinema.controller;
 
 import com.projetcinema.dao.ActeurRepository;
+import com.projetcinema.dto.ActeurDTO;
 import com.projetcinema.entity.Acteur;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,6 +11,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("acteur")
@@ -20,15 +22,16 @@ public class ActeurController {
     ActeurRepository acteurRepository;
 
     @GetMapping
-    public ResponseEntity<List<Acteur>> getActeurs() {
-        return new ResponseEntity<>(acteurRepository.findAll(), HttpStatus.OK);
+    public ResponseEntity<List<ActeurDTO>> getActeurs() {
+        return new ResponseEntity<>(acteurRepository.findAll().stream()
+                .map(a -> new ActeurDTO(a)).collect(Collectors.toList()), HttpStatus.OK);
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Acteur> getActeur(@PathVariable Integer id) {
+    public ResponseEntity<ActeurDTO> getActeur(@PathVariable Integer id) {
         Optional<Acteur> optionalActeur = acteurRepository.findById(id);
         if (!optionalActeur.isPresent()) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        return new ResponseEntity<>(optionalActeur.get(), HttpStatus.OK);
+        return new ResponseEntity<>(new ActeurDTO(optionalActeur.get()), HttpStatus.OK);
     }
 
     @PostMapping
