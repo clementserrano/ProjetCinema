@@ -12,6 +12,11 @@ import {CommonModule} from '@angular/common';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FilmAddUpdateComponent} from './film-add-update/film-add-update.component';
 import {MaterialModule} from './material.module';
+import {DialogAddRealisateurComponent} from './dialog-add-realisateur/dialog-add-realisateur.component';
+import {DialogAddCategorieComponent} from './dialog-add-categorie/dialog-add-categorie.component';
+import {DialogAddPersonnageComponent} from './dialog-add-personnage/dialog-add-personnage.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { DialogAddActeurComponent } from './dialog-add-acteur/dialog-add-acteur.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +24,11 @@ import {MaterialModule} from './material.module';
     NavbarComponent,
     FilmListComponent,
     FilmItemComponent,
-    FilmAddUpdateComponent
+    FilmAddUpdateComponent,
+    DialogAddRealisateurComponent,
+    DialogAddCategorieComponent,
+    DialogAddPersonnageComponent,
+    DialogAddActeurComponent
   ],
   imports: [
     BrowserModule,
@@ -27,8 +36,16 @@ import {MaterialModule} from './material.module';
     HttpClientModule,
     CommonModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
+  entryComponents: [
+    FilmAddUpdateComponent,
+    DialogAddRealisateurComponent,
+    DialogAddCategorieComponent,
+    DialogAddPersonnageComponent,
+    DialogAddActeurComponent],
   providers: [],
   bootstrap: [AppComponent]
 })

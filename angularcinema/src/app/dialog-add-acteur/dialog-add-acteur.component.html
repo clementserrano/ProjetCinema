@@ -1,0 +1,15 @@
+<h1 mat-dialog-title class="text-center">Ajouter un acteur</h1>
+<div mat-dialog-content>
+  <div class="form-container">
+    <mat-form-field>
+      <input matInput placeholder="Prénom" [(ngModel)]="data.prenAct">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Nom" [(ngModel)]="data.nomAct">
+    </mat-form-field>
+  </div>
+</div>
+<div mat-dialog-actions class="text-center">
+  <button mat-raised-button class="flex-center" [mat-dialog-close]="data"
+          color="primary" cdkFocusInitial>Enregistrer</button>
+</div>

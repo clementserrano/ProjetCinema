@@ -30,3 +30,8 @@ body {
   padding: 10px;
 }
 
+.flex-center{
+  flex: 1 1 auto;
+  text-align: center;
+}
+

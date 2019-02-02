@@ -33,9 +33,9 @@
       </mat-select>
     </mat-form-field>
 
-    <button mat-raised-button color="primary">Ajouter un réalisateur</button>
+    <button mat-raised-button color="primary" (click)="openDialogRealisateur()">Ajouter un réalisateur</button>
 
-    <mat-form-field class="select-categories">
+    <mat-form-field>
       <mat-select placeholder="Catégorie">
         <mat-option *ngFor="let categorie of categories" [value]="categorie">
           {{categorie.libelleCat}}
@@ -43,7 +43,7 @@
       </mat-select>
     </mat-form-field>
 
-    <button mat-raised-button color="primary">Ajouter une catégorie</button>
+    <button mat-raised-button color="primary" (click)="openDialogCategorie()">Ajouter une catégorie</button>
 
     <h3 class="text-center titre-personnages">Personnages</h3>
 
@@ -63,8 +63,8 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
 
-    <button mat-raised-button color="primary">Ajouter un personnage</button>
+    <button mat-raised-button color="primary" (click)="openDialogPersonnage()">Ajouter un personnage</button>
 
-    <button mat-raised-button color="warn" class="save-button">Enregistrer</button>
+    <button mat-raised-button color="warn" class="save-button" (click)="saveFilm()">Enregistrer</button>
   </div>
 </div>

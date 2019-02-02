@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {FilmService} from '../service/film.service';
 import {Film} from '../model/film';
 import {Categorie} from '../model/categorie';
@@ -7,6 +7,10 @@ import {Personnage} from '../model/personnage';
 import {RealisateurService} from '../service/realisateur.service';
 import {PersonnageService} from '../service/personnage.service';
 import {CategorieService} from '../service/categorie.service';
+import {MatDialog, MatSort, MatTableDataSource} from '@angular/material';
+import {DialogAddPersonnageComponent} from '../dialog-add-personnage/dialog-add-personnage.component';
+import {DialogAddCategorieComponent} from '../dialog-add-categorie/dialog-add-categorie.component';
+import {DialogAddRealisateurComponent} from '../dialog-add-realisateur/dialog-add-realisateur.component';
 
 @Component({
   selector: 'app-film-add-update',
@@ -19,11 +23,14 @@ export class FilmAddUpdateComponent implements OnInit {
   categories: Categorie[];
   realisateurs: Realisateur[];
   personnages: Personnage[];
-  datasource;
+
+  dataSource;
+  @ViewChild(MatSort) sort: MatSort;
   displayedColumns: string[] = ['acteur', 'role'];
 
   constructor(private filmService: FilmService, private realisateurService: RealisateurService,
-              private categorieService: CategorieService, private personnageService: PersonnageService) {
+              private categorieService: CategorieService, private personnageService: PersonnageService,
+              public dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -43,19 +50,52 @@ export class FilmAddUpdateComponent implements OnInit {
     });
   }
 
-  /*
-  this.dataSource = new MatTableDataSource(this.films);
-      this.dataSource.sortingDataAccessor = (item, property) => {
-        switch (property) {
-          case 'realisateur':
-            return item.realisateur.prenRea + ' ' + item.realisateur.nomRea;
-          case 'categorie':
-            return item.categorie.libelleCat;
-          default:
-            return item[property];
-        }
-      };
-      this.dataSource.sort = this.sort;
+  openDialogRealisateur(): void {
+    const dialogRef = this.dialog.open(DialogAddRealisateurComponent, {
+      width: '400px',
+      data: {}
     });
-   */
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result !== undefined) {
+        this.realisateurs.push(result);
+      }
+    });
+  }
+
+  openDialogCategorie(): void {
+    const dialogRef = this.dialog.open(DialogAddCategorieComponent, {
+      width: '400px',
+      data: {}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result !== undefined) {
+        this.categories.push(result);
+      }
+    });
+  }
+
+  openDialogPersonnage(): void {
+    const dialogRef = this.dialog.open(DialogAddPersonnageComponent, {
+      width: '400px',
+      data: {personnageId: {}}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result !== undefined) {
+        this.personnages.push(result);
+        this.dataSource = new MatTableDataSource(this.personnages);
+        this.dataSource.sortingDataAccessor = (item, property) => {
+          switch (property) {
+            case 'acteur':
+              return item.acteur.prenAct + ' ' + item.acteur.nomAct;
+            default:
+              return item[property];
+          }
+        };
+        this.dataSource.sort = this.sort;
+      }
+    });
+  }
 }

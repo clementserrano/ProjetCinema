@@ -1,0 +1,15 @@
+<h1 mat-dialog-title class="text-center">Ajouter un réalisateur</h1>
+<div mat-dialog-content>
+  <div class="form-container">
+    <mat-form-field>
+      <input matInput placeholder="Prénom" [(ngModel)]="data.prenRea">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Nom" [(ngModel)]="data.nomRea">
+    </mat-form-field>
+  </div>
+</div>
+<div mat-dialog-actions class="text-center">
+  <button mat-raised-button class="flex-center" [mat-dialog-close]="data"
+          color="primary" cdkFocusInitial>Enregistrer</button>
+</div>
