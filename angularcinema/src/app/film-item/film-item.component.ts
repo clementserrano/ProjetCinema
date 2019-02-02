@@ -26,14 +26,10 @@ export class FilmItemComponent implements OnInit {
     this.filmService.getFilm(this.noFilm).subscribe(film => {
       this.film = film;
     });
-    this.getRealisateur();
-  }
-
-  getRealisateur(): void {
+    console.log(this.film.realisateur.noRea);
     this.realisateurService.getRealisateur(this.film.realisateur.noRea).subscribe(realisateur => {
       this.realisateur = realisateur;
     });
   }
-
 
 }
