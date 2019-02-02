@@ -7,7 +7,7 @@ import {Personnage} from '../model/personnage';
 import {RealisateurService} from '../service/realisateur.service';
 import {PersonnageService} from '../service/personnage.service';
 import {CategorieService} from '../service/categorie.service';
-import {MatDialog, MatSort, MatTableDataSource} from '@angular/material';
+import {MatDialog, MatSnackBar, MatSort, MatTableDataSource} from '@angular/material';
 import {DialogAddPersonnageComponent} from '../dialog-add-personnage/dialog-add-personnage.component';
 import {DialogAddCategorieComponent} from '../dialog-add-categorie/dialog-add-categorie.component';
 import {DialogAddRealisateurComponent} from '../dialog-add-realisateur/dialog-add-realisateur.component';
@@ -30,7 +30,7 @@ export class FilmAddUpdateComponent implements OnInit {
 
   constructor(private filmService: FilmService, private realisateurService: RealisateurService,
               private categorieService: CategorieService, private personnageService: PersonnageService,
-              public dialog: MatDialog) {
+              public dialog: MatDialog, private snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
@@ -71,7 +71,14 @@ export class FilmAddUpdateComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result !== undefined) {
-        this.categories.push(result);
+        this.categorieService.addCategorie(result).subscribe(res => {
+          if (res !== undefined) {
+            this.categories.push(result);
+            this.snackBar.open('Catégorie ajoutée avec succès !', 'OK', {
+              duration: 4000,
+            });
+          }
+        });
       }
     });
   }
