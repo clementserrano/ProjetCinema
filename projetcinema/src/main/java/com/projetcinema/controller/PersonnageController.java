@@ -3,6 +3,8 @@ package com.projetcinema.controller;
 import com.projetcinema.dao.ActeurRepository;
 import com.projetcinema.dao.FilmRepository;
 import com.projetcinema.dao.PersonnageRepository;
+import com.projetcinema.dto.ActeurPersonnageDTO;
+import com.projetcinema.dto.PersonnageDTO;
 import com.projetcinema.entity.Acteur;
 import com.projetcinema.entity.Film;
 import com.projetcinema.entity.Personnage;
@@ -15,6 +17,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("personnage")
@@ -30,17 +33,19 @@ public class PersonnageController {
 
 
     @GetMapping
-    public ResponseEntity<List<Personnage>> getPersonnages() {
-        return new ResponseEntity<>(personnageRepository.findAll(), HttpStatus.OK);
+    public ResponseEntity<List<PersonnageDTO>> getPersonnages() {
+        return new ResponseEntity<>(personnageRepository.findAll().stream()
+                .map(p -> new PersonnageDTO(p)).collect(Collectors.toList()), HttpStatus.OK);
     }
 
     @GetMapping("{idActeur}")
-    public ResponseEntity<List<Personnage>> getPersonnagesByActeur(@PathVariable Integer idActeur) {
-        return new ResponseEntity(personnageRepository.findByPersonnageId_Acteur_NoAct(idActeur), HttpStatus.OK);
+    public ResponseEntity<List<ActeurPersonnageDTO>> getPersonnagesByActeur(@PathVariable Integer idActeur) {
+        return new ResponseEntity(personnageRepository.findByPersonnageId_Acteur_NoAct(idActeur)
+                .stream().map(p -> new ActeurPersonnageDTO(p)).collect(Collectors.toList()), HttpStatus.OK);
     }
 
     @GetMapping("{idFilm}/{idActeur}")
-    public ResponseEntity<Personnage> getPersonnage(@PathVariable Integer idFilm, @PathVariable Integer idActeur) {
+    public ResponseEntity<PersonnageDTO> getPersonnage(@PathVariable Integer idFilm, @PathVariable Integer idActeur) {
         Optional<Film> optionalFilm = filmRepository.findById(idFilm);
         if (!optionalFilm.isPresent()) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         Optional<Acteur> optionalActeur = acteurRepository.findById(idActeur);
@@ -53,7 +58,7 @@ public class PersonnageController {
         Optional<Personnage> optionalPersonnage = personnageRepository.findById(personnageId);
         if (!optionalPersonnage.isPresent()) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 
-        return new ResponseEntity<>(optionalPersonnage.get(), HttpStatus.OK);
+        return new ResponseEntity<>(new PersonnageDTO(optionalPersonnage.get()), HttpStatus.OK);
     }
 
     @PostMapping

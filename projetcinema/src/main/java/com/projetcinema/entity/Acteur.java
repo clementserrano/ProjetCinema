@@ -1,6 +1,5 @@
 package com.projetcinema.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -13,7 +12,6 @@ import java.util.List;
 @Table(name = "acteur")
 @Data
 @NoArgsConstructor
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler","acteur"})
 public class Acteur {
     @Id
     @Column(name = "NoAct")

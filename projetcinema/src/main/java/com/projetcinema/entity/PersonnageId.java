@@ -1,6 +1,5 @@
 package com.projetcinema.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -14,7 +13,6 @@ import java.io.Serializable;
 @Embeddable
 @Data
 @NoArgsConstructor
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler","personnages"})
 public class PersonnageId implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "NoFilm", nullable = false)

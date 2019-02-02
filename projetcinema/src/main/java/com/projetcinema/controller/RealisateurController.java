@@ -1,6 +1,7 @@
 package com.projetcinema.controller;
 
 import com.projetcinema.dao.RealisateurRepository;
+import com.projetcinema.dto.RealisateurDTO;
 import com.projetcinema.entity.Realisateur;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,6 +11,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("realisateur")
@@ -20,15 +22,16 @@ public class RealisateurController {
     RealisateurRepository realisateurRepository;
 
     @GetMapping
-    public ResponseEntity<List<Realisateur>> getRealisateurs() {
-        return new ResponseEntity<>(realisateurRepository.findAll(), HttpStatus.OK);
+    public ResponseEntity<List<RealisateurDTO>> getRealisateurs() {
+        return new ResponseEntity<>(realisateurRepository.findAll().stream()
+                .map(r -> new RealisateurDTO(r)).collect(Collectors.toList()), HttpStatus.OK);
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Realisateur> getRealisateur(@PathVariable Integer id) {
+    public ResponseEntity<RealisateurDTO> getRealisateur(@PathVariable Integer id) {
         Optional<Realisateur> optionalRealisateur = realisateurRepository.findById(id);
         if (!optionalRealisateur.isPresent()) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        return new ResponseEntity<>(optionalRealisateur.get(), HttpStatus.OK);
+        return new ResponseEntity<>(new RealisateurDTO(optionalRealisateur.get()), HttpStatus.OK);
     }
 
     @PostMapping
