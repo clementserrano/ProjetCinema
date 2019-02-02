@@ -1,6 +1,7 @@
 package com.projetcinema.controller;
 
 import com.projetcinema.dao.CategorieRepository;
+import com.projetcinema.dto.CategorieDTO;
 import com.projetcinema.entity.Categorie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,6 +11,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("categorie")
@@ -20,15 +22,16 @@ public class CategorieController {
     CategorieRepository categorieRepository;
 
     @GetMapping
-    public ResponseEntity<List<Categorie>> getCategories() {
-        return new ResponseEntity<>(categorieRepository.findAll(), HttpStatus.OK);
+    public ResponseEntity<List<CategorieDTO>> getCategories() {
+        return new ResponseEntity<>(categorieRepository.findAll().stream()
+                .map(c -> new CategorieDTO(c)).collect(Collectors.toList()), HttpStatus.OK);
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Categorie> getCategorie(@PathVariable String id) {
+    public ResponseEntity<CategorieDTO> getCategorie(@PathVariable String id) {
         Optional<Categorie> optionalCategorie = categorieRepository.findById(id);
         if (!optionalCategorie.isPresent()) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        return new ResponseEntity<>(optionalCategorie.get(), HttpStatus.OK);
+        return new ResponseEntity<>(new CategorieDTO(optionalCategorie.get()), HttpStatus.OK);
     }
 
     @PostMapping
