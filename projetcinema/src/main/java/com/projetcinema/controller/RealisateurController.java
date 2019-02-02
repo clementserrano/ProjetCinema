@@ -35,17 +35,17 @@ public class RealisateurController {
     }
 
     @PostMapping
-    public ResponseEntity<Realisateur> addRealisateur(@RequestBody Realisateur realisateur) {
-        realisateurRepository.save(realisateur);
-        return new ResponseEntity(realisateur, HttpStatus.CREATED);
+    public ResponseEntity<RealisateurDTO> addRealisateur(@RequestBody Realisateur realisateur) {
+        Realisateur newRealisateur = realisateurRepository.save(realisateur);
+        return new ResponseEntity(new RealisateurDTO(newRealisateur), HttpStatus.CREATED);
     }
 
     @PutMapping
-    public ResponseEntity<Realisateur> updateActeur(@RequestBody Realisateur realisateur) {
+    public ResponseEntity<RealisateurDTO> updateActeur(@RequestBody Realisateur realisateur) {
         Optional<Realisateur> optionalRealisateur = realisateurRepository.findById(realisateur.getNoRea());
         if (!optionalRealisateur.isPresent()) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        realisateurRepository.save(realisateur);
-        return new ResponseEntity(realisateur, HttpStatus.OK);
+        Realisateur newRealisateur = realisateurRepository.save(realisateur);
+        return new ResponseEntity(new RealisateurDTO(newRealisateur), HttpStatus.OK);
     }
 
     @DeleteMapping

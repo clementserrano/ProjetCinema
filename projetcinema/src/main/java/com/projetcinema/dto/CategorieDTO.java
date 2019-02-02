@@ -17,7 +17,9 @@ public class CategorieDTO {
     public CategorieDTO(Categorie categorie) {
         codeCat = categorie.getCodeCat();
         libelleCat = categorie.getLibelleCat();
-        films = categorie.getFilms().stream()
-                .map(f -> new FilmShortDTO(f)).collect(Collectors.toList());
+        if(categorie.getFilms() != null){
+            films = categorie.getFilms().stream()
+                    .map(f -> new FilmShortDTO(f)).collect(Collectors.toList());
+        }
     }
 }

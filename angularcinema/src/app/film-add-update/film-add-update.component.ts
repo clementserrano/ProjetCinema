@@ -11,6 +11,7 @@ import {MatDialog, MatSnackBar, MatSort, MatTableDataSource} from '@angular/mate
 import {DialogAddPersonnageComponent} from '../dialog-add-personnage/dialog-add-personnage.component';
 import {DialogAddCategorieComponent} from '../dialog-add-categorie/dialog-add-categorie.component';
 import {DialogAddRealisateurComponent} from '../dialog-add-realisateur/dialog-add-realisateur.component';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-film-add-update',
@@ -30,10 +31,13 @@ export class FilmAddUpdateComponent implements OnInit {
 
   constructor(private filmService: FilmService, private realisateurService: RealisateurService,
               private categorieService: CategorieService, private personnageService: PersonnageService,
-              public dialog: MatDialog, private snackBar: MatSnackBar) {
+              public dialog: MatDialog, private snackBar: MatSnackBar, private router: Router) {
   }
 
   ngOnInit() {
+    this.film = new Film();
+    this.film.personnages = [];
+    this.personnages = [];
     this.getRealisateurs();
     this.getCategories();
   }
@@ -59,12 +63,12 @@ export class FilmAddUpdateComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result !== undefined) {
         this.realisateurService.addRealisateur(result).subscribe(res => {
-          if (res !== undefined) {
-            this.realisateurs.push(result);
-            this.snackBar.open('Réalisateur ajouté avec succès !', 'OK', {
-              duration: 4000,
-            });
-          }
+          this.realisateurs.push(res);
+          this.snackBar.open('Réalisateur ajouté avec succès !', 'OK', {
+            duration: 4000,
+          });
+        }, error => {
+          this.printError(error);
         });
       }
     });
@@ -77,16 +81,14 @@ export class FilmAddUpdateComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result !== undefined) {
-        this.categorieService.addCategorie(result).subscribe(res => {
-          if (res !== undefined) {
-            this.categories.push(result);
-            this.snackBar.open('Catégorie ajoutée avec succès !', 'OK', {
-              duration: 4000,
-            });
-          }
+      this.categorieService.addCategorie(result).subscribe(res => {
+        this.categories.push(res);
+        this.snackBar.open('Catégorie ajoutée avec succès !', 'OK', {
+          duration: 4000,
         });
-      }
+      }, error => {
+        this.printError(error);
+      });
     });
   }
 
@@ -97,19 +99,40 @@ export class FilmAddUpdateComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result !== undefined) {
-        this.personnages.push(result);
-        this.dataSource = new MatTableDataSource(this.personnages);
-        this.dataSource.sortingDataAccessor = (item, property) => {
-          switch (property) {
-            case 'acteur':
-              return item.acteur.prenAct + ' ' + item.acteur.nomAct;
-            default:
-              return item[property];
-          }
-        };
-        this.dataSource.sort = this.sort;
-      }
+      this.personnages.push(result);
+      this.film.personnages.push(result);
+      this.dataSource = new MatTableDataSource(this.personnages);
+      this.dataSource.sortingDataAccessor = (item, property) => {
+        switch (property) {
+          case 'acteur':
+            return item.acteur.prenAct + ' ' + item.acteur.nomAct;
+          default:
+            return item[property];
+        }
+      };
+      this.dataSource.sort = this.sort;
+    }, error => {
+      this.printError(error);
+    });
+  }
+
+  saveFilm(): void {
+    this.filmService.addFilm(this.film).subscribe(res => {
+      this.snackBar.open('Film ajouté avec succès !', 'OK', {
+        duration: 4000,
+      });
+      this.router.navigate(['/films']);
+    }, error => {
+      this.printError(error);
+    });
+  }
+
+  printError(error: any): void {
+    const message = 'Erreur ' + error.error.status + ' : ' + error.error.error
+      + ' => ' + error.error.message;
+    console.error(error.error);
+    this.snackBar.open(message, 'OK', {
+      duration: 4000,
     });
   }
 }

@@ -35,17 +35,19 @@ public class FilmController {
     }
 
     @PostMapping
-    public ResponseEntity<Film> addFilm(@RequestBody Film film) {
-        filmRepository.save(film);
-        return new ResponseEntity<>(film, HttpStatus.CREATED);
+    public ResponseEntity<FilmDTO> addFilm(@RequestBody Film film) {
+        System.out.println(film);
+        Film newFilm = filmRepository.save(film);
+
+        return new ResponseEntity<>(new FilmDTO(newFilm), HttpStatus.CREATED);
     }
 
     @PutMapping
-    public ResponseEntity<Film> updateFilm(@RequestBody Film film) {
+    public ResponseEntity<FilmDTO> updateFilm(@RequestBody Film film) {
         Optional<Film> optionalFilm = filmRepository.findById(film.getNoFilm());
         if (!optionalFilm.isPresent()) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        filmRepository.save(film);
-        return new ResponseEntity<>(film, HttpStatus.OK);
+        Film newFilm = filmRepository.save(film);
+        return new ResponseEntity<>(new FilmDTO(newFilm), HttpStatus.OK);
     }
 
     @DeleteMapping

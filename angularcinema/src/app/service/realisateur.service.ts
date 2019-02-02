@@ -20,7 +20,7 @@ export class RealisateurService {
     return this.http.get<Realisateur>(this.url + '/' + id);
   }
 
-  addRealisateur(realisateur: Realisateur): Observable<Object> {
+  addRealisateur(realisateur: Realisateur): Observable<any> {
     return this.http.post(this.url, realisateur);
   }
 }

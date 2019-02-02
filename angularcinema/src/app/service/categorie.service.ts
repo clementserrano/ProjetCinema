@@ -20,7 +20,7 @@ export class CategorieService {
     return this.http.get<Categorie>(this.url + '/' + code);
   }
 
-  addCategorie(categorie: Categorie): Observable<Object> {
+  addCategorie(categorie: Categorie): Observable<any> {
     return this.http.post(this.url, categorie);
   }
 }

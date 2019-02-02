@@ -2,7 +2,7 @@
 <div mat-dialog-content>
   <div class="form-container">
     <mat-form-field>
-      <mat-select placeholder="Acteur">
+      <mat-select placeholder="Acteur" [(ngModel)]="data.personnageId.acteur">
         <mat-option *ngFor="let acteur of acteurs" [value]="acteur">
           {{acteur.prenAct}} {{acteur.nomAct}}
         </mat-option>

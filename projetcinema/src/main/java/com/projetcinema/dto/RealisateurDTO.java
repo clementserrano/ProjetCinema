@@ -19,6 +19,8 @@ public class RealisateurDTO {
         noRea = r.getNoRea();
         nomRea = r.getNomRea();
         prenRea = r.getPrenRea();
-        films = r.getFilms().stream().map(f -> new FilmShortDTO(f)).collect(Collectors.toList());
+        if(r.getFilms() != null){
+            films = r.getFilms().stream().map(f -> new FilmShortDTO(f)).collect(Collectors.toList());
+        }
     }
 }

@@ -7,9 +7,20 @@
     <mat-form-field>
       <input matInput placeholder="Nom" [(ngModel)]="data.nomAct">
     </mat-form-field>
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker1" placeholder="Date de naissance" [(ngModel)]="data.dateNaiss">
+      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+      <mat-datepicker #picker1></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker2" placeholder="Date de décès" [(ngModel)]="data.dateDeces">
+      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+      <mat-datepicker #picker2></mat-datepicker>
+    </mat-form-field>
   </div>
 </div>
 <div mat-dialog-actions class="text-center">
   <button mat-raised-button class="flex-center" [mat-dialog-close]="data"
-          color="primary" cdkFocusInitial>Enregistrer</button>
+          color="primary" cdkFocusInitial>Enregistrer
+  </button>
 </div>

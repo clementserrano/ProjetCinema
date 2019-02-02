@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef, MatSnackBar} from '@angular/material';
 import {Personnage} from '../model/personnage';
 import {Acteur} from '../model/acteur';
 import {ActeurService} from '../service/acteur.service';
@@ -16,7 +16,8 @@ export class DialogAddPersonnageComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<DialogAddPersonnageComponent>,
               @Inject(MAT_DIALOG_DATA) public data: Personnage,
-              private acteurService: ActeurService, public dialog: MatDialog) {
+              private acteurService: ActeurService, public dialog: MatDialog,
+              private snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
@@ -37,8 +38,24 @@ export class DialogAddPersonnageComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result !== undefined) {
-        this.acteurs.push(result);
+        this.acteurService.addActeur(result).subscribe(res => {
+          this.acteurs.push(res);
+          this.snackBar.open('Acteur ajouté avec succès !', 'OK', {
+            duration: 4000,
+          });
+        }, error => {
+          this.printError(error);
+        });
       }
+    });
+  }
+
+  printError(error: any): void {
+    const message = 'Erreur ' + error.error.status + ' : ' + error.error.error
+      + ' => ' + error.error.message;
+    console.error(error.error);
+    this.snackBar.open(message, 'OK', {
+      duration: 4000,
     });
   }
 
