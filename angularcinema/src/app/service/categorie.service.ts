@@ -16,7 +16,7 @@ export class CategorieService {
     return this.http.get<Categorie[]>(this.url);
   }
 
-  getCategorie(code: string): Observable<Categorie> {
+  getCategorie(code: String): Observable<Categorie> {
     return this.http.get<Categorie>(this.url + '/' + code);
   }
 }

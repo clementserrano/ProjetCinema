@@ -5,6 +5,8 @@ import {MatTableDataSource} from '@angular/material';
 import {Film} from '../model/film';
 import {RealisateurService} from '../service/realisateur.service';
 import {Realisateur} from '../model/realisateur';
+import {Categorie} from '../model/categorie';
+import {CategorieService} from '../service/categorie.service';
 
 @Component({
   selector: 'app-film-item',
@@ -13,22 +15,18 @@ import {Realisateur} from '../model/realisateur';
 })
 export class FilmItemComponent implements OnInit {
   film: Film;
-  realisateur: Realisateur;
   public noFilm;
-  constructor(private filmService: FilmService, private realisateurService: RealisateurService, private route: ActivatedRoute) { }
+
+  constructor(private filmService: FilmService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.noFilm = this.route.snapshot.paramMap.get('noFilm');
     this.getFilm();
   }
-  /*TODO faire comme dans film-list.component pour récup les infos du film et les afficher ensuite*/
+
   getFilm(): void {
     this.filmService.getFilm(this.noFilm).subscribe(film => {
       this.film = film;
-    });
-    console.log(this.film.realisateur.noRea);
-    this.realisateurService.getRealisateur(this.film.realisateur.noRea).subscribe(realisateur => {
-      this.realisateur = realisateur;
     });
   }
 
