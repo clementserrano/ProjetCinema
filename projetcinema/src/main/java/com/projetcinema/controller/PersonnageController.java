@@ -38,12 +38,6 @@ public class PersonnageController {
                 .map(p -> new PersonnageDTO(p)).collect(Collectors.toList()), HttpStatus.OK);
     }
 
-    @GetMapping("{idActeur}")
-    public ResponseEntity<List<ActeurPersonnageDTO>> getPersonnagesByActeur(@PathVariable Integer idActeur) {
-        return new ResponseEntity(personnageRepository.findByPersonnageId_Acteur_NoAct(idActeur)
-                .stream().map(p -> new ActeurPersonnageDTO(p)).collect(Collectors.toList()), HttpStatus.OK);
-    }
-
     @GetMapping("{idFilm}/{idActeur}")
     public ResponseEntity<PersonnageDTO> getPersonnage(@PathVariable Integer idFilm, @PathVariable Integer idActeur) {
         Optional<Film> optionalFilm = filmRepository.findById(idFilm);

@@ -11,5 +11,4 @@ import java.util.List;
 @RepositoryRestResource
 @CrossOrigin
 public interface PersonnageRepository extends JpaRepository<Personnage, PersonnageId> {
-    List<Personnage> findByPersonnageId_Acteur_NoAct(Integer noAct);
 }
