@@ -16,6 +16,7 @@ import {CategorieService} from '../service/categorie.service';
 export class FilmItemComponent implements OnInit {
   film: Film;
   public noFilm;
+  // films = [{id: 'test1', titre: 'test1titre'}, {id: 'test2', titre: 'test2titre'}];
 
   constructor(private filmService: FilmService, private route: ActivatedRoute) { }
 
