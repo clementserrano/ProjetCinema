@@ -10,6 +10,7 @@ import {CategorieService} from '../service/categorie.service';
 import {DialogAddRealisateurComponent} from '../dialog-add-realisateur/dialog-add-realisateur.component';
 import {DialogInfoRealisateurComponent} from '../dialog-info-realisateur/dialog-info-realisateur.component';
 import {Personnage} from '../model/personnage';
+import {DataSource} from '@angular/cdk/table';
 
 @Component({
   selector: 'app-film-item',
@@ -18,11 +19,10 @@ import {Personnage} from '../model/personnage';
 })
 export class FilmItemComponent implements OnInit {
   displayedColumns: string[] = ['Personnage', 'Acteur'];
-  dataSourcePersonnages: Personnage[];
+  dataSourcePersonnages: DataSource<Personnage>;
   film: Film;
   realisateur: Realisateur;
-  public noFilm;
-  // films = [{id: 'test1', titre: 'test1titre'}, {id: 'test2', titre: 'test2titre'}];
+  noFilm;
 
   constructor(private filmService: FilmService, private realisateurService: RealisateurService,
               private route: ActivatedRoute, public dialog: MatDialog) { }
@@ -36,7 +36,7 @@ export class FilmItemComponent implements OnInit {
     this.filmService.getFilm(this.noFilm).subscribe(film => {
       this.film = film;
       this.getRealisateur(film.realisateur.noRea);
-      this.dataSourcePersonnages = film.personnages;
+      this.dataSourcePersonnages = new MatTableDataSource(film.personnages);
     });
   }
 
@@ -57,19 +57,5 @@ export class FilmItemComponent implements OnInit {
       width: '400px',
       data: {dataKey: this.realisateur}
     });
-/*
-    dialogRef.afterClosed().subscribe(result => {
-      if (result !== undefined) {
-        this.realisateurService.addRealisateur(result).subscribe(res => {
-          this.realisateurs.push(res);
-          this.snackBar.open('Réalisateur ajouté avec succès !', 'OK', {
-            duration: 4000,
-          });
-        }, error => {
-          this.printError(error);
-        });
-      }
-    });
-    */
   }
 }

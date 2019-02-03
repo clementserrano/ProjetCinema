@@ -13,3 +13,16 @@ h2{
 h1{
   padding-left: 2%;
 }
+
+.label{
+  font-weight: bold;
+  padding-left:20px;
+}
+
+.details{
+  width: 500px;
+}
+
+.real{
+  text-decoration: underline;
+}

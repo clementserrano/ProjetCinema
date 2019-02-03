@@ -1,32 +1,48 @@
-<h1>{{film.titre}}</h1>
-<h2>Détails du film</h2>
-<p class="details">
-  Durée du film: {{convertMinsToHrsMins(film.duree)}}<br>
-  Date de sortie: {{film.dateSortie | date: 'dd/MM/yyyy'}} <br>
-  categorieFilm: {{film.categorie.libelleCat}} <br>
-  personnages: <br>
-  Réalisateur: {{realisateur.prenRea}} {{realisateur.nomRea}} <button (click)="openDialogRealisateurInfos()">Détails</button>
-</p>
+<div class="basic-container" *ngIf="film !== undefined">
+  <h1>{{film.titre}}</h1>
+  <h2>Détails du film</h2>
+  <table class="details">
+    <tr>
+      <td class="label">Durée</td>
+      <td>{{convertMinsToHrsMins(film.duree)}}</td>
+    </tr>
+    <tr>
+      <td class="label">Date de sortie</td>
+      <td>{{film.dateSortie | date: 'dd/MM/yyyy'}}</td>
+    </tr>
+    <tr>
+      <td class="label">Catégorie</td>
+      <td>{{film.categorie.libelleCat}}</td>
+    </tr>
+    <tr>
+      <td class="label">Réalisateur</td>
+      <td>
+        <a class="real" (click)="openDialogRealisateurInfos()">
+          {{film.realisateur.prenRea}} {{film.realisateur.nomRea}}
+        </a>
+      </td>
+    </tr>
+  </table>
 
-<h2>Personnages</h2>
+  <h2>Personnages</h2>
 
-<table mat-table class="mat-elevation-z8" [dataSource]="dataSourcePersonnages">
+  <table mat-table class="mat-elevation-z8" [dataSource]="dataSourcePersonnages">
 
-  <!-- Position Column -->
-  <ng-container matColumnDef="Personnage">
-    <th mat-header-cell *matHeaderCellDef> Personnage </th>
-    <td mat-cell *matCellDef="let personnage"> {{personnage.nomPers}} </td>
-  </ng-container>
+    <!-- Position Column -->
+    <ng-container matColumnDef="Personnage">
+      <th mat-header-cell *matHeaderCellDef> Personnage</th>
+      <td mat-cell *matCellDef="let personnage"> {{personnage.nomPers}} </td>
+    </ng-container>
 
-  <!-- Name Column -->
-  <ng-container matColumnDef="Acteur">
-    <th mat-header-cell *matHeaderCellDef> Acteur </th>
-    <td mat-cell *matCellDef="let personnage"> {{personnage.personnageId.acteur.prenAct}} {{personnage.personnageId.acteur.nomAct}} </td>
-  </ng-container>
+    <!-- Name Column -->
+    <ng-container matColumnDef="Acteur">
+      <th mat-header-cell *matHeaderCellDef> Acteur</th>
+      <td mat-cell
+          *matCellDef="let personnage"> {{personnage.personnageId.acteur.prenAct}} {{personnage.personnageId.acteur.nomAct}} </td>
+    </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
-</table>
-
-
+  </table>
+</div>
