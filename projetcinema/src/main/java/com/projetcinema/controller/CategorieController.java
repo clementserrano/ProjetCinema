@@ -35,17 +35,17 @@ public class CategorieController {
     }
 
     @PostMapping
-    public ResponseEntity<Categorie> addCategorie(@RequestBody Categorie categorie) {
-        categorieRepository.save(categorie);
-        return new ResponseEntity<>(categorie, HttpStatus.CREATED);
+    public ResponseEntity<CategorieDTO> addCategorie(@RequestBody Categorie categorie) {
+        Categorie newCategorie = categorieRepository.save(categorie);
+        return new ResponseEntity<>(new CategorieDTO(newCategorie), HttpStatus.CREATED);
     }
 
     @PutMapping
-    public ResponseEntity<Categorie> updateCategorie(@RequestBody Categorie categorie) {
+    public ResponseEntity<CategorieDTO> updateCategorie(@RequestBody Categorie categorie) {
         Optional<Categorie> optionalCategorie = categorieRepository.findById(categorie.getCodeCat());
         if (!optionalCategorie.isPresent()) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        categorieRepository.save(categorie);
-        return new ResponseEntity<>(categorie, HttpStatus.OK);
+        Categorie newCategorie = categorieRepository.save(categorie);
+        return new ResponseEntity<>(new CategorieDTO(newCategorie), HttpStatus.OK);
     }
 
     @DeleteMapping

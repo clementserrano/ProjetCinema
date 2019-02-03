@@ -35,17 +35,17 @@ public class ActeurController {
     }
 
     @PostMapping
-    public ResponseEntity<Acteur> addActeur(@RequestBody Acteur acteur) {
-        acteurRepository.save(acteur);
-        return new ResponseEntity(acteur, HttpStatus.CREATED);
+    public ResponseEntity<ActeurDTO> addActeur(@RequestBody Acteur acteur) {
+        Acteur newActeur = acteurRepository.save(acteur);
+        return new ResponseEntity(new ActeurDTO(newActeur), HttpStatus.CREATED);
     }
 
     @PutMapping
-    public ResponseEntity<Acteur> updateActeur(@RequestBody Acteur acteur) {
+    public ResponseEntity<ActeurDTO> updateActeur(@RequestBody Acteur acteur) {
         Optional<Acteur> optionalActeur = acteurRepository.findById(acteur.getNoAct());
         if (!optionalActeur.isPresent()) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        acteurRepository.save(acteur);
-        return new ResponseEntity(acteur, HttpStatus.OK);
+        Acteur newActeur = acteurRepository.save(acteur);
+        return new ResponseEntity(new ActeurDTO(newActeur), HttpStatus.OK);
     }
 
     @DeleteMapping

@@ -7,11 +7,11 @@ import lombok.Setter;
 @Getter
 @Setter
 public class FilmPersonnageDTO {
-    private ActeurShortDTO acteur;
+    private FilmPersonnageIdDTO personnageId;
     private String nomPers;
 
     public FilmPersonnageDTO(Personnage personnage) {
-        acteur = new ActeurShortDTO(personnage.getPersonnageId().getActeur());
+        personnageId = new FilmPersonnageIdDTO(personnage.getPersonnageId());
         nomPers = personnage.getNomPers();
     }
 }

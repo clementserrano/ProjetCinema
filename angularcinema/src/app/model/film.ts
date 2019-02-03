@@ -11,5 +11,5 @@ export class Film {
   montantRecette: number;
   realisateur: Realisateur;
   categorie: Categorie;
-  peronnsages: Personnage[];
+  personnages: Personnage[];
 }

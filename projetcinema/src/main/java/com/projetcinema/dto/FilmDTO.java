@@ -30,7 +30,9 @@ public class FilmDTO {
         montantRecette = film.getMontantRecette();
         realisateur = new RealisateurShortDTO(film.getRealisateur());
         categorie = new CategorieShortDTO(film.getCategorie());
-        personnages = film.getPersonnages().stream()
-                .map(p -> new FilmPersonnageDTO(p)).collect(Collectors.toList());
+        if(film.getPersonnages() != null){
+            personnages = film.getPersonnages().stream()
+                    .map(p -> new FilmPersonnageDTO(p)).collect(Collectors.toList());
+        }
     }
 }

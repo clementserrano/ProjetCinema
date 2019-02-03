@@ -56,17 +56,17 @@ public class PersonnageController {
     }
 
     @PostMapping
-    public ResponseEntity<Personnage> addPersonnage(@RequestBody Personnage personnage) {
-        personnageRepository.save(personnage);
-        return new ResponseEntity(personnage, HttpStatus.CREATED);
+    public ResponseEntity<PersonnageDTO> addPersonnage(@RequestBody Personnage personnage) {
+        Personnage newPersonnage = personnageRepository.save(personnage);
+        return new ResponseEntity(new PersonnageDTO(newPersonnage), HttpStatus.CREATED);
     }
 
     @PutMapping
-    public ResponseEntity<Personnage> updatePersonnage(@RequestBody Personnage personnage) {
+    public ResponseEntity<PersonnageDTO> updatePersonnage(@RequestBody Personnage personnage) {
         Optional<Personnage> optionalPersonnage = personnageRepository.findById(personnage.getPersonnageId());
         if (!optionalPersonnage.isPresent()) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        personnageRepository.save(personnage);
-        return new ResponseEntity<>(personnage, HttpStatus.OK);
+        Personnage newPersonnage = personnageRepository.save(personnage);
+        return new ResponseEntity<>(new PersonnageDTO(newPersonnage), HttpStatus.OK);
     }
 
     @DeleteMapping

@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {FilmService} from '../service/film.service';
 import {Film} from '../model/film';
 import {MatSort, MatTableDataSource} from '@angular/material';
@@ -15,7 +15,6 @@ export class FilmListComponent implements OnInit {
   dataSource;
 
   @ViewChild(MatSort) sort: MatSort;
-
   constructor(private filmService: FilmService) {
   }
 
