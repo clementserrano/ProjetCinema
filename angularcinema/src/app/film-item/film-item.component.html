@@ -1,8 +1,8 @@
 <p>
-  film n°: {{noFilm}} <br>
+  film n°{{noFilm}} <br>
   titre du film: {{film.titre}} <br>
-  Durée du film: {{film.duree}} minutes <br>
-  Date de sortie: {{film.dateSortie}} <br>
+  Durée du film: {{convertMinsToHrsMins(film.duree)}}<br>
+  Date de sortie: {{film.dateSortie | date: 'dd/MM/yyyy'}} <br>
   categorieFilm: {{film.categorie.libelleCat}} <br>
   Autres films réalisés par {{film.realisateur.nomRea}} {{film.realisateur.prenRea}}:<br>
 </p>
