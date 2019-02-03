@@ -50,8 +50,13 @@ public class FilmController {
     public ResponseEntity<FilmDTO> updateFilm(@RequestBody Film film) {
         Optional<Film> optionalFilm = filmRepository.findById(film.getNoFilm());
         if (!optionalFilm.isPresent()) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        Film newFilm = filmRepository.save(film);
-        return new ResponseEntity<>(new FilmDTO(newFilm), HttpStatus.OK);
+        List<Personnage> personnages = optionalFilm.get().getPersonnages();
+        personnages.clear();
+        film.getPersonnages().forEach(p -> p.getPersonnageId().setFilm(optionalFilm.get()));
+        personnages.addAll(film.getPersonnages());
+        film.setPersonnages(personnages);
+        Film updatedFilm = filmRepository.save(film);
+        return new ResponseEntity<>(new FilmDTO(updatedFilm), HttpStatus.OK);
     }
 
     @DeleteMapping("{id}")

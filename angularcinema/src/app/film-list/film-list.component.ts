@@ -24,8 +24,8 @@ export class FilmListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getFilms();
     this.getCategories();
+    this.getFilms();
   }
 
   getFilms(): void {
