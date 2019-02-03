@@ -1,8 +1,9 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {FilmService} from '../service/film.service';
 import {Film} from '../model/film';
-import {MatSort, MatTableDataSource} from '@angular/material';
+import {MatDialog, MatSnackBar, MatSort, MatTableDataSource} from '@angular/material';
 import {CategorieService} from '../service/categorie.service';
+import {DialogDeleteFilmComponent} from '../dialog-delete-film/dialog-delete-film.component';
 
 @Component({
   selector: 'app-film-list',
@@ -13,12 +14,13 @@ import {CategorieService} from '../service/categorie.service';
 export class FilmListComponent implements OnInit {
   films: Film[];
   categories: any[];
-  displayedColumns: string[] = ['noFilm', 'titre', 'duree', 'dateSortie', 'realisateur', 'categorie'];
+  displayedColumns: string[] = ['noFilm', 'titre', 'duree', 'dateSortie', 'realisateur', 'categorie', 'edit', 'delete'];
   dataSource;
 
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private filmService: FilmService, private categorieService: CategorieService) {
+  constructor(private filmService: FilmService, private categorieService: CategorieService,
+              public dialog: MatDialog, private snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
@@ -72,5 +74,35 @@ export class FilmListComponent implements OnInit {
       }
     };
     this.dataSource.sort = this.sort;
+  }
+
+  openDialogDelete(film: Film): void {
+    const dialogRef = this.dialog.open(DialogDeleteFilmComponent, {
+      width: '300px',
+      data: film
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result !== undefined && result === true) {
+        this.filmService.deleteFilm(film.noFilm).subscribe(res => {
+          this.films.splice(this.films.indexOf(film), 1);
+          this.changeCat();
+          this.snackBar.open('Film supprimé avec succès !', 'OK', {
+            duration: 4000,
+          });
+        }, error => {
+          this.printError(error);
+        });
+      }
+    });
+  }
+
+  printError(error: any): void {
+    const message = 'Erreur ' + error.error.status + ' : ' + error.error.error
+      + ' => ' + error.error.message;
+    console.error(error.error);
+    this.snackBar.open(message, 'OK', {
+      duration: 4000,
+    });
   }
 }

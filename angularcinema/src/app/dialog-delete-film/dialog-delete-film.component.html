@@ -1,0 +1,12 @@
+<h1 mat-dialog-title class="text-center">Supprimer ce film ?</h1>
+<div mat-dialog-content>
+  <h3 class="text-center">{{data.titre}}</h3>
+</div>
+<div mat-dialog-actions class="text-center">
+  <button mat-raised-button class="flex-center" (click)="deleteFilm(true)"
+          color="warn">Oui
+  </button>
+  <button mat-raised-button class="flex-center" (click)="deleteFilm(false)"
+          color="primary">Non
+  </button>
+</div>

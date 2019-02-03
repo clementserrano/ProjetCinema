@@ -48,14 +48,6 @@ public class RealisateurController {
         return new ResponseEntity(new RealisateurDTO(newRealisateur), HttpStatus.OK);
     }
 
-    @DeleteMapping
-    public ResponseEntity deleteRealisateur(@RequestBody Realisateur realisateur) {
-        Optional<Realisateur> optionalRealisateur = realisateurRepository.findById(realisateur.getNoRea());
-        if (!optionalRealisateur.isPresent()) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        realisateurRepository.delete(optionalRealisateur.get());
-        return new ResponseEntity(HttpStatus.OK);
-    }
-
     @DeleteMapping("{id}")
     public ResponseEntity deleteRealisateur(@PathVariable Integer id) {
         Optional<Realisateur> optionalRealisateur = realisateurRepository.findById(id);

@@ -9,3 +9,7 @@ table {
 .categorie-item{
   display: block;
 }
+
+.flex-100{
+  flex: 0 0 100px;
+}

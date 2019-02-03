@@ -54,14 +54,6 @@ public class FilmController {
         return new ResponseEntity<>(new FilmDTO(newFilm), HttpStatus.OK);
     }
 
-    @DeleteMapping
-    public ResponseEntity deleteFilm(@RequestBody Film film) {
-        Optional<Film> optionalFilm = filmRepository.findById(film.getNoFilm());
-        if (!optionalFilm.isPresent()) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        filmRepository.delete(optionalFilm.get());
-        return new ResponseEntity(HttpStatus.OK);
-    }
-
     @DeleteMapping("{id}")
     public ResponseEntity deleteFilm(@PathVariable Integer id) {
         Optional<Film> optionalFilm = filmRepository.findById(id);
