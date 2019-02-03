@@ -4,14 +4,25 @@
   Durée du film: {{convertMinsToHrsMins(film.duree)}}<br>
   Date de sortie: {{film.dateSortie | date: 'dd/MM/yyyy'}} <br>
   categorieFilm: {{film.categorie.libelleCat}} <br>
-  Autres films réalisés par {{film.realisateur.nomRea}} {{film.realisateur.prenRea}}:<br>
+  personnages: <br>
 </p>
 
 <ul>
-  <li *ngFor="let fillm of film.realisateur.films">
+  <li *ngFor="let personnage of film.personnages">
+    personnage {{personnage.nomPers}} joué par: {{personnage.personnageId.acteur.prenAct}} {{personnage.personnageId.acteur.nomAct}}
+  </li>
+</ul>
+
+<p>
+  Réalisateur: {{realisateur.prenRea}} {{realisateur.nomRea}}<br>
+</p>
+
+<!--
+<ul>
+  <li *ngFor="let fillm of realisateur.films">
     {{fillm.titre}}
   </li>
 </ul>
 
-
+-->
 

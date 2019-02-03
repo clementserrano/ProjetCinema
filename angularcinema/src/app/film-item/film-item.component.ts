@@ -15,10 +15,11 @@ import {CategorieService} from '../service/categorie.service';
 })
 export class FilmItemComponent implements OnInit {
   film: Film;
+  realisateur: Realisateur;
   public noFilm;
   // films = [{id: 'test1', titre: 'test1titre'}, {id: 'test2', titre: 'test2titre'}];
 
-  constructor(private filmService: FilmService, private route: ActivatedRoute) { }
+  constructor(private filmService: FilmService, private realisateurService: RealisateurService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.noFilm = this.route.snapshot.paramMap.get('noFilm');
@@ -28,12 +29,19 @@ export class FilmItemComponent implements OnInit {
   getFilm(): void {
     this.filmService.getFilm(this.noFilm).subscribe(film => {
       this.film = film;
+      this.getRealisateur(film.realisateur.noRea);
+    });
+  }
+
+  getRealisateur(norea): void {
+    this.realisateurService.getRealisateur(norea).subscribe(realisateur => {
+      this.realisateur = realisateur;
     });
   }
 
   convertMinsToHrsMins(minutes): string {
     const h = Math.floor(minutes / 60);
     const m = minutes % 60;
-    return h + 'h' + m + 'm';
+    return h + 'h' + m;
   }
 }
