@@ -1,5 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FilmService } from '../service/film.service';
+import {ActivatedRoute} from '@angular/router';
+import {MatTableDataSource} from '@angular/material';
+import {Film} from '../model/film';
+import {RealisateurService} from '../service/realisateur.service';
+import {Realisateur} from '../model/realisateur';
+import {Categorie} from '../model/categorie';
+import {CategorieService} from '../service/categorie.service';
 
 @Component({
   selector: 'app-film-item',
@@ -7,10 +14,34 @@ import { FilmService } from '../service/film.service';
   styleUrls: ['./film-item.component.css']
 })
 export class FilmItemComponent implements OnInit {
+  film: Film;
+  realisateur: Realisateur;
+  public noFilm;
+  // films = [{id: 'test1', titre: 'test1titre'}, {id: 'test2', titre: 'test2titre'}];
 
-  constructor(private filmService: FilmService) { }
+  constructor(private filmService: FilmService, private realisateurService: RealisateurService, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.noFilm = this.route.snapshot.paramMap.get('noFilm');
+    this.getFilm();
   }
 
+  getFilm(): void {
+    this.filmService.getFilm(this.noFilm).subscribe(film => {
+      this.film = film;
+      this.getRealisateur(film.realisateur.noRea);
+    });
+  }
+
+  getRealisateur(norea): void {
+    this.realisateurService.getRealisateur(norea).subscribe(realisateur => {
+      this.realisateur = realisateur;
+    });
+  }
+
+  convertMinsToHrsMins(minutes): string {
+    const h = Math.floor(minutes / 60);
+    const m = minutes % 60;
+    return h + 'h' + m;
+  }
 }

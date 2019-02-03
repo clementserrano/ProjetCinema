@@ -1,6 +1,7 @@
 package com.projetcinema.controller;
 
 import com.projetcinema.dao.FilmRepository;
+import com.projetcinema.dto.FilmDTO;
 import com.projetcinema.entity.Film;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,6 +11,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("film")
@@ -20,15 +22,16 @@ public class FilmController {
     FilmRepository filmRepository;
 
     @GetMapping
-    public ResponseEntity<List<Film>> getFilms() {
-        return new ResponseEntity<>(filmRepository.findAll(), HttpStatus.OK);
+    public ResponseEntity<List<FilmDTO>> getFilms() {
+        return new ResponseEntity<>(filmRepository.findAll().stream()
+                .map(f -> new FilmDTO(f)).collect(Collectors.toList()), HttpStatus.OK);
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Film> getFilm(@PathVariable Integer id) {
+    public ResponseEntity<FilmDTO> getFilm(@PathVariable Integer id) {
         Optional<Film> optionalFilm = filmRepository.findById(id);
         if (!optionalFilm.isPresent()) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        return new ResponseEntity<>(optionalFilm.get(), HttpStatus.OK);
+        return new ResponseEntity<>(new FilmDTO(optionalFilm.get()), HttpStatus.OK);
     }
 
     @PostMapping

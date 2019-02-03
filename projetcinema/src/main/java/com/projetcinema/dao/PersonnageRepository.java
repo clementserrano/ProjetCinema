@@ -1,7 +1,5 @@
 package com.projetcinema.dao;
 
-import com.projetcinema.entity.Acteur;
-import com.projetcinema.entity.Film;
 import com.projetcinema.entity.Personnage;
 import com.projetcinema.entity.PersonnageId;
 import org.springframework.data.jpa.repository.JpaRepository;
