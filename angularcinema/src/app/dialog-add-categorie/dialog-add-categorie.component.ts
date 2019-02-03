@@ -16,4 +16,12 @@ export class DialogAddCategorieComponent implements OnInit {
   ngOnInit() {
   }
 
+  isFilledForm(): boolean {
+    if (this.data.codeCat === undefined || this.data.codeCat === ''
+      || this.data.libelleCat === undefined || this.data.libelleCat === '') {
+      return true;
+    }
+    return false;
+  }
+
 }

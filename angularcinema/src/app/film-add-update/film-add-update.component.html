@@ -69,6 +69,6 @@
 
     <button mat-raised-button color="primary" (click)="openDialogPersonnage()">Ajouter un personnage</button>
 
-    <button mat-raised-button color="warn" class="save-button" (click)="saveFilm()">Enregistrer</button>
+    <button mat-raised-button color="warn" class="save-button" [disabled]="isFilledForm()" (click)="saveFilm()">Enregistrer</button>
   </div>
 </div>

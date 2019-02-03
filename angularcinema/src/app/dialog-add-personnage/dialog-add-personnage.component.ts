@@ -59,4 +59,12 @@ export class DialogAddPersonnageComponent implements OnInit {
     });
   }
 
+  isFilledForm(): boolean {
+    if (this.data.nomPers === undefined || this.data.nomPers === ''
+      || this.data.personnageId.acteur === undefined) {
+      return true;
+    }
+    return false;
+  }
+
 }

@@ -3,6 +3,7 @@ package com.projetcinema.controller;
 import com.projetcinema.dao.FilmRepository;
 import com.projetcinema.dto.FilmDTO;
 import com.projetcinema.entity.Film;
+import com.projetcinema.entity.Personnage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,10 +37,13 @@ public class FilmController {
 
     @PostMapping
     public ResponseEntity<FilmDTO> addFilm(@RequestBody Film film) {
-        System.out.println(film);
+        List<Personnage> personnages = film.getPersonnages();
+        film.setPersonnages(null);
         Film newFilm = filmRepository.save(film);
-
-        return new ResponseEntity<>(new FilmDTO(newFilm), HttpStatus.CREATED);
+        personnages.stream().forEach(p -> p.getPersonnageId().setFilm(newFilm));
+        newFilm.setPersonnages(personnages);
+        Film returnFilm = filmRepository.save(newFilm);
+        return new ResponseEntity<>(new FilmDTO(returnFilm), HttpStatus.CREATED);
     }
 
     @PutMapping

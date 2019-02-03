@@ -16,4 +16,12 @@ export class DialogAddRealisateurComponent implements OnInit {
   ngOnInit() {
   }
 
+  isFilledForm(): boolean {
+    if (this.data.prenRea === undefined || this.data.prenRea === ''
+      || this.data.nomRea === undefined || this.data.nomRea === '') {
+      return true;
+    }
+    return false;
+  }
+
 }

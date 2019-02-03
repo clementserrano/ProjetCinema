@@ -16,4 +16,14 @@ export class DialogAddActeurComponent implements OnInit {
   ngOnInit() {
   }
 
+  isFilledForm(): boolean {
+    if (this.data.nomAct === undefined || this.data.nomAct === ''
+      || this.data.prenAct === undefined || this.data.prenAct === ''
+      || this.data.dateDeces === undefined
+      || this.data.dateNaiss === undefined) {
+      return true;
+    }
+    return false;
+  }
+
 }

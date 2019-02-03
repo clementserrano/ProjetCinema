@@ -81,14 +81,16 @@ export class FilmAddUpdateComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.categorieService.addCategorie(result).subscribe(res => {
-        this.categories.push(res);
-        this.snackBar.open('Catégorie ajoutée avec succès !', 'OK', {
-          duration: 4000,
+      if (result !== undefined) {
+        this.categorieService.addCategorie(result).subscribe(res => {
+          this.categories.push(res);
+          this.snackBar.open('Catégorie ajoutée avec succès !', 'OK', {
+            duration: 4000,
+          });
+        }, error => {
+          this.printError(error);
         });
-      }, error => {
-        this.printError(error);
-      });
+      }
     });
   }
 
@@ -99,20 +101,20 @@ export class FilmAddUpdateComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.personnages.push(result);
-      this.film.personnages.push(result);
-      this.dataSource = new MatTableDataSource(this.personnages);
-      this.dataSource.sortingDataAccessor = (item, property) => {
-        switch (property) {
-          case 'acteur':
-            return item.acteur.prenAct + ' ' + item.acteur.nomAct;
-          default:
-            return item[property];
-        }
-      };
-      this.dataSource.sort = this.sort;
-    }, error => {
-      this.printError(error);
+      if (result !== undefined) {
+        this.personnages.push(result);
+        this.film.personnages.push(result);
+        this.dataSource = new MatTableDataSource(this.personnages);
+        this.dataSource.sortingDataAccessor = (item, property) => {
+          switch (property) {
+            case 'acteur':
+              return item.acteur.prenAct + ' ' + item.acteur.nomAct;
+            default:
+              return item[property];
+          }
+        };
+        this.dataSource.sort = this.sort;
+      }
     });
   }
 
@@ -134,5 +136,18 @@ export class FilmAddUpdateComponent implements OnInit {
     this.snackBar.open(message, 'OK', {
       duration: 4000,
     });
+  }
+
+  isFilledForm(): boolean {
+    if (this.film.titre === undefined || this.film.titre === ''
+      || this.film.budget === undefined
+      || this.film.montantRecette === undefined
+      || this.film.duree === undefined
+      || this.film.dateSortie === undefined
+      || this.film.categorie === undefined
+      || this.film.realisateur === undefined) {
+      return true;
+    }
+    return false;
   }
 }

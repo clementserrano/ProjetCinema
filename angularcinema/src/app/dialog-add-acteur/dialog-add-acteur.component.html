@@ -21,6 +21,6 @@
 </div>
 <div mat-dialog-actions class="text-center">
   <button mat-raised-button class="flex-center" [mat-dialog-close]="data"
-          color="primary" cdkFocusInitial>Enregistrer
+          color="primary" [disabled]="isFilledForm()">Enregistrer
   </button>
 </div>
