@@ -17,6 +17,7 @@ import {DialogAddCategorieComponent} from './dialog-add-categorie/dialog-add-cat
 import {DialogAddPersonnageComponent} from './dialog-add-personnage/dialog-add-personnage.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { DialogAddActeurComponent } from './dialog-add-acteur/dialog-add-acteur.component';
+import { DialogInfoRealisateurComponent } from './dialog-info-realisateur/dialog-info-realisateur.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { DialogAddActeurComponent } from './dialog-add-acteur/dialog-add-acteur.
     DialogAddRealisateurComponent,
     DialogAddCategorieComponent,
     DialogAddPersonnageComponent,
-    DialogAddActeurComponent
+    DialogAddActeurComponent,
+    DialogInfoRealisateurComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +47,8 @@ import { DialogAddActeurComponent } from './dialog-add-acteur/dialog-add-acteur.
     DialogAddRealisateurComponent,
     DialogAddCategorieComponent,
     DialogAddPersonnageComponent,
-    DialogAddActeurComponent],
+    DialogAddActeurComponent,
+    DialogInfoRealisateurComponent],
   providers: [],
   bootstrap: [AppComponent]
 })
