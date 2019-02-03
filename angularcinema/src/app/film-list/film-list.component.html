@@ -1,39 +1,53 @@
-<h1>Liste de films</h1>
+<mat-sidenav-container class="fill-height">
+  <mat-sidenav class="padding-10" mode="side" opened>
+    <h3>Catégories</h3>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="basic-container">
+      <h2 class="text-center">Liste des films</h2>
 
-<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
 
-  <ng-container matColumnDef="noFilm">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
-    <td mat-cell *matCellDef="let film"> {{film.noFilm}} </td>
-  </ng-container>
+        <ng-container matColumnDef="noFilm">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> No.</th>
+          <td mat-cell *matCellDef="let film"> {{film.noFilm}}</td>
+        </ng-container>
 
-  <ng-container matColumnDef="titre">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Titre </th>
-    <td mat-cell *matCellDef="let film"> <button routerLink="/films/{{film.noFilm}}"> {{film.titre}}</button></td>
-  </ng-container>
+        <ng-container matColumnDef="titre">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Titre</th>
+          <td mat-cell *matCellDef="let film">
+            <button routerLink="/films/{{film.noFilm}}"> {{film.titre}}</button>
+          </td>
+        </ng-container>
 
-  <ng-container matColumnDef="duree">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Durée </th>
-    <td mat-cell *matCellDef="let film"> {{film.duree}} </td>
-  </ng-container>
+        <ng-container matColumnDef="duree">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Durée</th>
+          <td mat-cell *matCellDef="let film"> {{film.duree}}</td>
+        </ng-container>
 
-  <ng-container matColumnDef="dateSortie">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Date Sortie </th>
-    <td mat-cell *matCellDef="let film"> {{film.dateSortie | date: 'dd/MM/yyyy'}} </td>
-  </ng-container>
+        <ng-container matColumnDef="dateSortie">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Date Sortie</th>
+          <td mat-cell *matCellDef="let film"> {{film.dateSortie | date: 'dd/MM/yyyy'}}</td>
+        </ng-container>
 
-  <ng-container matColumnDef="realisateur">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Réalisateur </th>
-    <td mat-cell *matCellDef="let film"> {{film.realisateur.prenRea}} {{film.realisateur.nomRea}} </td>
-  </ng-container>
+        <ng-container matColumnDef="realisateur">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Réalisateur</th>
+          <td mat-cell *matCellDef="let film"> {{film.realisateur.prenRea}} {{film.realisateur.nomRea}}</td>
+        </ng-container>
 
-  <ng-container matColumnDef="categorie">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Catégorie </th>
-    <td mat-cell *matCellDef="let film"> {{film.categorie.libelleCat}} </td>
-  </ng-container>
+        <ng-container matColumnDef="categorie">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Catégorie</th>
+          <td mat-cell *matCellDef="let film"> {{film.categorie.libelleCat}}</td>
+        </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
 
+      <div class="text-center add-film">
+        <a routerLink="/addFilm" mat-raised-button color="primary">Ajouter un film</a>
+      </div>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
 

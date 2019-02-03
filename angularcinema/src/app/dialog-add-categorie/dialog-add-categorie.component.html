@@ -1,0 +1,16 @@
+<h1 mat-dialog-title class="text-center">Ajouter une catégorie</h1>
+<div mat-dialog-content>
+  <div class="form-container">
+    <mat-form-field>
+      <input matInput placeholder="Code" [(ngModel)]="data.codeCat">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Libellé" [(ngModel)]="data.libelleCat">
+    </mat-form-field>
+  </div>
+</div>
+<div mat-dialog-actions class="text-center">
+  <button mat-raised-button class="flex-center" [mat-dialog-close]="data"
+          color="primary" [disabled]="isFilledForm()">Enregistrer
+  </button>
+</div>

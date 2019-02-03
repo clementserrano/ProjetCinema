@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Realisateur} from '../model/realisateur';
@@ -18,5 +18,9 @@ export class RealisateurService {
 
   getRealisateur(id: number): Observable<Realisateur> {
     return this.http.get<Realisateur>(this.url + '/' + id);
+  }
+
+  addRealisateur(realisateur: Realisateur): Observable<any> {
+    return this.http.post(this.url, realisateur);
   }
 }

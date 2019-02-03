@@ -1,0 +1,25 @@
+<h1 mat-dialog-title class="text-center">Ajouter un personnage</h1>
+<div mat-dialog-content>
+  <div class="form-container">
+    <mat-form-field>
+      <mat-select placeholder="Acteur" [(ngModel)]="data.personnageId.acteur">
+        <mat-option *ngFor="let acteur of acteurs" [value]="acteur">
+          {{acteur.prenAct}} {{acteur.nomAct}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" class="add-acteur"
+            (click)="openDialogActeur()">Ajouter un acteur
+    </button>
+
+    <mat-form-field>
+      <input matInput placeholder="Rôle" [(ngModel)]="data.nomPers">
+    </mat-form-field>
+  </div>
+</div>
+<div mat-dialog-actions class="text-center">
+  <button mat-raised-button class="flex-center" [mat-dialog-close]="data"
+          color="warn" [disabled]="isFilledForm()">Enregistrer
+  </button>
+</div>

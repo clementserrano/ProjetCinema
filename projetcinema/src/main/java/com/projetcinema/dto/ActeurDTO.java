@@ -24,7 +24,9 @@ public class ActeurDTO {
         prenAct = acteur.getPrenAct();
         dateNaiss = acteur.getDateNaiss();
         dateDeces = acteur.getDateDeces();
-        personnages = acteur.getPersonnages().stream()
-                .map(p -> new ActeurPersonnageDTO(p)).collect(Collectors.toList());
+        if(acteur.getPersonnages() != null){
+            personnages = acteur.getPersonnages().stream()
+                    .map(p -> new ActeurPersonnageDTO(p)).collect(Collectors.toList());
+        }
     }
 }

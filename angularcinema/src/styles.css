@@ -11,14 +11,27 @@ body {
 }
 
 .basic-container {
-  padding: 30px;
+  padding: 0px 30px 30px 30px;
 }
 
-.toolbar-item{
-  text-decoration: none;
-  color: black;
-}
-
-.vertical-align-middle{
+.vertical-align-middle {
   vertical-align: middle;
 }
+
+.text-center {
+  text-align: center;
+}
+
+.fill-height {
+  height: 100%;
+}
+
+.padding-10 {
+  padding: 10px;
+}
+
+.flex-center{
+  flex: 1 1 auto;
+  text-align: center;
+}
+

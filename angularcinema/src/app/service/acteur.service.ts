@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Acteur} from '../model/acteur';
@@ -18,5 +18,9 @@ export class ActeurService {
 
   getActeur(id: number): Observable<Acteur> {
     return this.http.get<Acteur>(this.url + '/' + id);
+  }
+
+  addActeur(acteur: Acteur): Observable<any> {
+    return this.http.post(this.url, acteur);
   }
 }
