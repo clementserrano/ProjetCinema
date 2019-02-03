@@ -15,7 +15,6 @@ import {FilmAddUpdateComponent} from './film-add-update/film-add-update.componen
 import {DialogAddRealisateurComponent} from './dialog-add-realisateur/dialog-add-realisateur.component';
 import {DialogAddCategorieComponent} from './dialog-add-categorie/dialog-add-categorie.component';
 import {DialogAddPersonnageComponent} from './dialog-add-personnage/dialog-add-personnage.component';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {DialogAddActeurComponent} from './dialog-add-acteur/dialog-add-acteur.component';
 import {DialogDeleteFilmComponent} from './dialog-delete-film/dialog-delete-film.component';
 import { DialogInfoRealisateurComponent } from './dialog-info-realisateur/dialog-info-realisateur.component';
@@ -31,7 +30,7 @@ import { DialogInfoRealisateurComponent } from './dialog-info-realisateur/dialog
     DialogAddCategorieComponent,
     DialogAddPersonnageComponent,
     DialogAddActeurComponent,
-    DialogDeleteFilmComponent
+    DialogDeleteFilmComponent,
     DialogInfoRealisateurComponent
   ],
   imports: [
@@ -50,8 +49,7 @@ import { DialogInfoRealisateurComponent } from './dialog-info-realisateur/dialog
     DialogAddCategorieComponent,
     DialogAddPersonnageComponent,
     DialogAddActeurComponent,
-    DialogDeleteFilmComponent
-  ],
+    DialogDeleteFilmComponent,
     DialogInfoRealisateurComponent],
   providers: [],
   bootstrap: [AppComponent]
