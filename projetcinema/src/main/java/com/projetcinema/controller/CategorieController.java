@@ -48,14 +48,6 @@ public class CategorieController {
         return new ResponseEntity<>(new CategorieDTO(newCategorie), HttpStatus.OK);
     }
 
-    @DeleteMapping
-    public ResponseEntity deleteFilm(@RequestBody Categorie categorie) {
-        Optional<Categorie> optionalCategorie = categorieRepository.findById(categorie.getCodeCat());
-        if (!optionalCategorie.isPresent()) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        categorieRepository.delete(optionalCategorie.get());
-        return new ResponseEntity(HttpStatus.OK);
-    }
-
     @DeleteMapping("{id}")
     public ResponseEntity deleteFilm(@PathVariable String id) {
         Optional<Categorie> optionalCategorie = categorieRepository.findById(id);

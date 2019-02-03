@@ -69,14 +69,6 @@ public class PersonnageController {
         return new ResponseEntity<>(new PersonnageDTO(newPersonnage), HttpStatus.OK);
     }
 
-    @DeleteMapping
-    public ResponseEntity deletePersonnage(@RequestBody Personnage personnage) {
-        Optional<Personnage> optionalPersonnage = personnageRepository.findById(personnage.getPersonnageId());
-        if (!optionalPersonnage.isPresent()) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        personnageRepository.delete(optionalPersonnage.get());
-        return new ResponseEntity(HttpStatus.OK);
-    }
-
     @DeleteMapping("{idFilm}/{idActeur}")
     public ResponseEntity deletePersonnage(@PathVariable Integer idFilm, @PathVariable Integer idActeur) {
         Optional<Film> optionalFilm = filmRepository.findById(idFilm);

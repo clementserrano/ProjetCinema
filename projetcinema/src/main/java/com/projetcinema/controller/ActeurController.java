@@ -48,14 +48,6 @@ public class ActeurController {
         return new ResponseEntity(new ActeurDTO(newActeur), HttpStatus.OK);
     }
 
-    @DeleteMapping
-    public ResponseEntity deleteActeur(@RequestBody Acteur acteur) {
-        Optional<Acteur> optionalActeur = acteurRepository.findById(acteur.getNoAct());
-        if (!optionalActeur.isPresent()) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        acteurRepository.delete(optionalActeur.get());
-        return new ResponseEntity(HttpStatus.OK);
-    }
-
     @DeleteMapping("{id}")
     public ResponseEntity deleteActeur(@PathVariable Integer id) {
         Optional<Acteur> optionalActeur = acteurRepository.findById(id);
