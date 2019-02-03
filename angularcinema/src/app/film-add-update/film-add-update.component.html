@@ -2,7 +2,7 @@
 
   <h2 class="text-center">Ajouter un film</h2>
 
-  <div class="form-container">
+  <div class="form-container" *ngIf="film !== undefined">
     <mat-form-field>
       <input matInput placeholder="Titre" [(ngModel)]="film.titre">
     </mat-form-field>
@@ -26,7 +26,7 @@
     </mat-form-field>
 
     <mat-form-field>
-      <mat-select placeholder="Réalisateur" [(ngModel)]="film.realisateur">
+      <mat-select placeholder="Réalisateur" [(ngModel)]="film.realisateur" [compareWith]="compareRealisateurs">
         <mat-option *ngFor="let realisateur of realisateurs" [value]="realisateur">
           {{realisateur.prenRea}} {{realisateur.nomRea}}
         </mat-option>
@@ -38,7 +38,7 @@
     </button>
 
     <mat-form-field>
-      <mat-select placeholder="Catégorie" [(ngModel)]="film.categorie">
+      <mat-select placeholder="Catégorie" [(ngModel)]="film.categorie" [compareWith]="compareCategories">
         <mat-option *ngFor="let categorie of categories" [value]="categorie">
           {{categorie.libelleCat}}
         </mat-option>
@@ -49,7 +49,8 @@
 
     <h3 class="text-center titre-personnages">Personnages</h3>
 
-    <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 liste-personnages">
+    <table *ngIf="film.personnages.length > 0" mat-table [dataSource]="dataSource" matSort
+           class="mat-elevation-z8 liste-personnages">
 
       <ng-container matColumnDef="acteur">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Acteur</th>
@@ -63,12 +64,25 @@
         <td mat-cell *matCellDef="let personnage"> {{personnage.nomPers}}</td>
       </ng-container>
 
+      <ng-container matColumnDef="delete">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let personnage">
+          <button mat-raised-button color="warn" (click)="removePersonnage(personnage)">
+            <mat-icon class="vertical-align-middle">delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
 
+    <span class="text-center aucun-personnages" *ngIf="film.personnages.length == 0" >Aucun personnage ne joue dans ce film</span>
+
     <button mat-raised-button color="primary" (click)="openDialogPersonnage()">Ajouter un personnage</button>
 
-    <button mat-raised-button color="warn" class="save-button" [disabled]="isFilledForm()" (click)="saveFilm()">Enregistrer</button>
+    <button mat-raised-button color="warn" class="save-button" [disabled]="isFilledForm()" (click)="saveFilm()">
+      Enregistrer
+    </button>
   </div>
 </div>

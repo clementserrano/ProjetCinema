@@ -13,3 +13,7 @@ table {
 .flex-100{
   flex: 0 0 100px;
 }
+
+mat-sidenav {
+  min-width: 160px;
+}
