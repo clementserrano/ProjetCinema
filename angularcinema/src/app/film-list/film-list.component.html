@@ -1,6 +1,10 @@
 <mat-sidenav-container class="fill-height">
   <mat-sidenav class="padding-10" mode="side" opened>
     <h3>Catégories</h3>
+    <mat-checkbox class="categorie-item" *ngFor="let cat of categories"
+                  [(ngModel)]="cat.selected" (change)="changeCat()">
+      {{cat.libelleCat}}
+    </mat-checkbox>
   </mat-sidenav>
   <mat-sidenav-content>
     <div class="basic-container">
