@@ -1,0 +1,32 @@
+<ion-menu side="start" menuId="categories">
+    <ion-header>
+        <ion-toolbar color="primary">
+            <ion-title>Catégorie</ion-title>
+        </ion-toolbar>
+    </ion-header>
+    <ion-content>
+        <ion-list>
+            <ion-item *ngFor="let categorie of categories">
+                <ion-label>{{categorie.libelleCat}}</ion-label>
+                <ion-checkbox [(ngModel)]="categorie.selected"
+                              (ngModelChange)="changeCat()">
+                </ion-checkbox>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-menu>
+
+<ion-router-outlet main></ion-router-outlet>
+
+<ion-list>
+    <ion-list-header>
+        <h1>Liste des films</h1>
+    </ion-list-header>
+    <ion-item *ngFor="let film of films">
+        <ion-label>
+            <ion-button [routerLink]="'/films/'+film.noFilm" color="light">{{film.titre}}</ion-button>
+        </ion-label>
+        {{film.categorie.libelleCat}}
+        <br>
+    </ion-item>
+</ion-list>

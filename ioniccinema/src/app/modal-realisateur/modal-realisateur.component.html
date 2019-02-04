@@ -1,0 +1,17 @@
+<ion-card *ngIf="realisateur !==undefined">
+    <ion-card-header>
+        <ion-card-title>{{realisateur.prenRea}} {{realisateur.nomRea}}</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+        <h2>Tous les films réalisés</h2>
+
+        <ion-list *ngIf="realisateur.films.length > 0">
+            <ion-item>
+                <ion-label *ngFor="let film of realisateur.films">{{film.titre}}</ion-label>
+            </ion-item>
+        </ion-list>
+
+        <span *ngIf="realisateur.films.length == 0">Aucun film réalisé par ce réalisateur</span>
+    </ion-card-content>
+</ion-card>
