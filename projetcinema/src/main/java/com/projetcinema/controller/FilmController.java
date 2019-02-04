@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("film")
-@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:8100"})
+@CrossOrigin(origins = "*")
 public class FilmController {
 
     private @Autowired

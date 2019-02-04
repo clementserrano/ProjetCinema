@@ -8,6 +8,6 @@ export class ConfigService {
     adresseIp: string;
 
     constructor() {
-        this.adresseIp = 'localhost';
+        this.adresseIp = '192.168.43.108';
     }
 }

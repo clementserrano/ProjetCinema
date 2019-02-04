@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {RealisateurService} from '../service/realisateur.service';
 import {Realisateur} from '../model/realisateur';
+import {ModalController} from '@ionic/angular';
 
 @Component({
     selector: 'app-modal-realisateur',
@@ -12,7 +13,7 @@ export class ModalRealisateurComponent implements OnInit {
     @Input() noRea: number;
     realisateur: Realisateur;
 
-    constructor(private realisateurService: RealisateurService) {
+    constructor(private realisateurService: RealisateurService, private modalController: ModalController) {
     }
 
     ngOnInit() {
@@ -25,4 +26,7 @@ export class ModalRealisateurComponent implements OnInit {
         });
     }
 
+    close(): void {
+        this.modalController.dismiss();
+    }
 }
