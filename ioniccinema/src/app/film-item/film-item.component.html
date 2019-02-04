@@ -1,0 +1,46 @@
+<ion-card *ngIf="film !==undefined">
+    <ion-card-header>
+        <ion-card-title>{{film.titre}}</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+        <h2>Détails du film</h2>
+        <table>
+            <tr>
+                <td class="label">Durée</td>
+                <td>{{convertMinsToHrsMins(film.duree)}}</td>
+            </tr>
+            <tr>
+                <td class="label">Date de sortie</td>
+                <td>{{film.dateSortie | date: 'dd/MM/yyyy'}}</td>
+            </tr>
+            <tr>
+                <td class="label">Catégorie</td>
+                <td>{{film.categorie.libelleCat}}</td>
+            </tr>
+            <tr>
+                <td class="label">Réalisateur</td>
+                <td>
+                    <a class="real" (click)="openModalRealisateurInfos()">
+                        {{film.realisateur.prenRea}} {{film.realisateur.nomRea}}
+                    </a>
+                </td>
+            </tr>
+        </table>
+
+        <h2 class="titre-personnage">Personnages</h2>
+
+        <table *ngIf="film.personnages.length>0">
+            <tr>
+                <th>Acteur</th>
+                <th>Rôle</th>
+            </tr>
+            <tr *ngFor="let personnage of film.personnages">
+                <td>{{personnage.personnageId.acteur.prenAct}} {{personnage.personnageId.acteur.nomAct}}</td>
+                <td>{{personnage.nomPers}}</td>
+            </tr>
+        </table>
+
+        <span *ngIf="film.personnages.length == 0">Aucun personnage ne joue dans ce film</span>
+    </ion-card-content>
+</ion-card>
